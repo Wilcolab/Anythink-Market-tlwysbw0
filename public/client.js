@@ -20,10 +20,6 @@ function calculate(operand1, operand2, operation) {
     var uri = location.origin + "/arithmetic";
 
     // TODO: Add operator
-    if (!operation) {
-        setError();
-        return;
-    }
     switch (operation) {
         case '+':
             uri += "?operation=add";
@@ -36,6 +32,9 @@ function calculate(operand1, operand2, operation) {
             break;
         case '/':
             uri += "?operation=divide";
+            break;
+        case '^':
+            uri += "?operation=power";
             break;
         default:
             setError();
