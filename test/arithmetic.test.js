@@ -94,10 +94,89 @@ describe('Arithmetic', function () {
     });
 
 // TODO: Challenge #1
- 
-
-    describe('Multiplication', function () {
-        it('multiplies two positive integers', function (done) {
+describe('Multiplication', function () {
+    it('multiplies two positive integers', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=21&operand2=2')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 42 });
+                done();
+            });
+    });
+    it('multiplies a positive integer with zero', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=21&operand2=0')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 0 });
+                done();
+            });
+    });
+    it('multiplies a positive integer and negative integer', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=21&operand2=-2')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: -42 });
+                done();
+            });
+    });
+    it('multiplies two negative integers', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=-21&operand2=-2')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 42 });
+                done();
+            });
+    });
+    it('multiplies two floating point numbers', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=.5&operand2=0.5')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 0.25 });
+                done();
+            });
+    });
+    it('multiplies supporting exponential notation', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=4.2e1&operand2=1e0')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 42 });
+                done();
+            });
+    });
+    it('multiplies a negative float and a positive integer', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=-2.5&operand2=4')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: -10 });
+                done();
+            });
+    });
+    it('multiplies two numbers with exponents', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=1e2&operand2=3e1')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 3000 });
+                done();
+            });
+    });
+    it('multiplies a number by one', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=123&operand2=1')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 123 });
+                done();
+            });
+    });
+    it('multiplies two zeros', function (done) {
+        request.get('/arithmetic?operation=multiply&operand1=0&operand2=0')
+            .expect(200)
+            .end(function (err, res) {
+                expect(res.body).to.eql({ result: 0 });
+                done();
+            });
+    });
+});
+// We recommend installing an extension to run mocha tests.
             request.get('/arithmetic?operation=multiply&operand1=21&operand2=2')
                 .expect(200)
                 .end(function (err, res) {
