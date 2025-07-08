@@ -198,3 +198,4 @@ function setLoading(loading) {
         buttons[i].disabled = loading;
     }
 }
+// Completed code
